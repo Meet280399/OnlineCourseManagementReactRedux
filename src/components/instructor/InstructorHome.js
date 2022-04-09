@@ -17,6 +17,7 @@ function InstructorHome({ instructorsData, fetchInstructors, deleteInstructor })
             <table className="table border shadow">
                 <thead className="thead-dark">
                     <tr>
+                    {console.log("Instructor" + JSON.stringify(instructorsData.loading))}
                         <th scope="col">Instructor Id</th>
                         <th scope="col">Instructor Name</th>
                         <th scope ="col">Instructor Email</th>
@@ -33,6 +34,7 @@ function InstructorHome({ instructorsData, fetchInstructors, deleteInstructor })
 
                     {instructorsData.instructors.map((instructor, index) => (
                         <tr key={index}>
+                            {console.log("Instructor" + JSON.stringify(instructor))}
                             <td>{instructor.instructorId}</td>
                             <td>{instructor.name}</td>
                             <td>{instructor.email}</td>

@@ -36,7 +36,7 @@ function StudentHome({ studentsData, fetchStudents, deleteStud }) {
           </tr>
         </thead>
         <tbody>
-          {this.studentsData.students.map((student, courses, index) => (
+          {studentsData.students.map((student, courses, index) => (
             <tr>
               {console.log("stud" + JSON.stringify(student))}
               <td key={index}> {student.studentId} </td>
@@ -45,10 +45,10 @@ function StudentHome({ studentsData, fetchStudents, deleteStud }) {
               <td key={index}> {student.studentAddress} </td>
               <td key={index}> {student.studentMobile} </td>
               {/* <td> {student.course.courseName} </td> */}
-                {courses.map((courseName, i) => {
+                {/* {courses.map((courseName, i) => {
                   {console.log("courses" + JSON.stringify(this.courses))}
                   <td key={i}>{courseName}</td>
-                })}
+                })} */}
               <td>
                 <Link
                   className="btn btn-outline-primary mr-2"

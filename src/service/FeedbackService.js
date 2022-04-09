@@ -4,7 +4,7 @@ class FeedbackService {
   baseUrl = `http://localhost:8090/onlinecoursemanagement/rest/feedbacks`;
   // baseCourseUrl = `http://localhost:8090/onlinecoursemanagement/rest/courses`;
   getAllFeedbacks() {
-    alert("inside get all feedback");
+    // alert("inside get all feedback");
     return axios.get(this.baseUrl);
   }
 
@@ -17,7 +17,7 @@ class FeedbackService {
     return axios.post(this.baseUrl, feedback);
   }
 
-  deleteFeedbacktById(feedId) {
+  deleteFeedbackById(feedId) {
     return axios.delete(this.baseUrl + "/" + feedId);
   }
 

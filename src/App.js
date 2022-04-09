@@ -8,6 +8,9 @@ import StudentHome from "./components/student/StudentHome";
 import SubjectHome from "./components/subject/SubjectHome";
 import InstructorHome from './components/instructor/InstructorHome';
 import FeedbackHome from "./components/feedback/FeedbackHome";
+import AddSubject from "./components/subject/AddSubject";
+import AddStudent from './components/student/AddStudent';
+import UpdateStudent from './components/student/UpdateStudent';
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
         <Link to={`/students`}>Show Students</Link>
         <br></br>
         <Link to={`/subjects`}>Show Subjects</Link>
+        <br></br>
+        <Link to={`/subjects/add`}>Add Subjects</Link>
         <br></br>
         <Link to={`/instructors`}>Show Instructor</Link>
         <br></br>
@@ -39,9 +44,12 @@ function App() {
 
           {/* routing for student module  */}
           <Route exact path="/students" element={<StudentHome />} />
+          <Route exact path="/students/add" element={<AddStudent />} />
+          <Route exact path="/students/update/:studId" element={<UpdateStudent />} />
 
           {/* routing for subject module  */}
           <Route exact path="/subjects" element={<SubjectHome />} />
+          <Route exact path="/subjects/add" element={<AddSubject />} />
 
           {/* routing for instructor module  */}
           <Route exact path="/instructors" element={<InstructorHome />} />

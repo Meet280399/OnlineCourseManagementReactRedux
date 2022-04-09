@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteFeedback, fetchFeedbacks } from "../../redux/feedback/feedbackAction";
-function FeedbackHome({ feedbacksData, fetchFeedbacks, deleteFeed }) {//bcm prop of comp
+function FeedbackHome({ feedbacksData, fetchFeedbacks, deleteFeedback }) {//bcm prop of comp
 
     useEffect(() => {
         fetchFeedbacks();
@@ -43,7 +43,7 @@ function FeedbackHome({ feedbacksData, fetchFeedbacks, deleteFeed }) {//bcm prop
                                 </Link>
                                 <button
                                     className="btn btn-outline-primary mr-2"
-                                    onClick={() => deleteFeed(feedback.feedbackId)}>
+                                    onClick={() => deleteFeedback(feedback.feedbackId)}>
                                     Delete
                                 </button>
                             </td>
@@ -62,7 +62,7 @@ const mapStateToProps = (state) => {// redux state
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFeedbacks: () => { dispatch(fetchFeedbacks()) },
-        deleteFeed: (feedId) => { dispatch(deleteFeedback(feedId)) },
+        deleteFeedback: (feedId) => { dispatch(deleteFeedback(feedId)) },
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FeedbackHome);

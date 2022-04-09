@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 // import Student from "./../model/Student";
-import StudentService from "./../service/StudentService";
+import StudentService from "../../service/StudentService";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { updateStudent } from "./../redux/student/studentActions";
+import { updateStudent } from "../../redux/student/studentActions";
 
 export default function UpdateStudent() {
   //useSelector: A hook to access the redux store's state.

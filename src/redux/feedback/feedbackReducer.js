@@ -37,7 +37,7 @@ const reducer = (state = initialState, action) => {//state transition n home com
         case FETCH_FEEDBACKS_SUCCESS:
             return {
                 ...state,
-                Feedbacks: action.payload,//feed data
+                feedbacks: action.payload,//feed data
                 loading: false
             };
         case FETCH_FEEDBACKS_FAILURE:
