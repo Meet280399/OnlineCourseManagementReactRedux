@@ -1,0 +1,33 @@
+.add-student input.form-control {
+  width: 80%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.add-student form.studentForm {
+  border: solid 1px black;
+  padding: 10px;
+}
+.add-student .studentInput {
+  margin: 5px 10px;
+  height: 60px;
+  display: flex;
+  position: relative;
+}
+.add-student .label-div {
+  width: 20%;
+  float: left;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  top: 15px;
+}
+.add-student .btn-custom {
+  border-radius: inherit;
+  text-align: center;
+}
+.add-student .error-message {
+  position: absolute;
+  top: 75%;
+  left: 20%;
+}

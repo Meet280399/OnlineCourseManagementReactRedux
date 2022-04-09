@@ -15,6 +15,7 @@ export default function UpdateStudent() {
   const [student, setStudent] = useState();
   // const [courses, setCourses] = useState([]);
 
+
   let service = new StudentService();
 
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ export default function UpdateStudent() {
               />
             </div>
             <div>
+              {/* <div className="alert-danger">{error.nameError}</div> */}
               <input
                 className="form-control my-2"
                 type="text"
@@ -72,6 +74,7 @@ export default function UpdateStudent() {
               />
             </div>
             <div>
+              {/* <div className="alert-danger">{error.emailError}</div> */}
               <input
                 className="form-control my-2"
                 type="text"
@@ -87,6 +90,7 @@ export default function UpdateStudent() {
               />
             </div>
             <div>
+              {/* <div className="alert-danger">{error.addressError}</div> */}
               <input
                 className="form-control my-2"
                 type="text"
@@ -102,12 +106,14 @@ export default function UpdateStudent() {
               />
             </div>
             <div>
+              {/* <div className="alert-danger">{error.mobileError}</div> */}
               <input
                 className="form-control my-2"
                 type="text"
                 id="studentMobile"
                 placeholder="Enter Student Mobile"
                 value={student.studentMobile}
+                onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
                 onChange={(e) => {
                   setStudent({
                     ...student,
@@ -127,12 +133,21 @@ export default function UpdateStudent() {
                 ))}
               </select>
             </div> */}
-            <button className="btn btn-outline-primary mt-3" onClick={handleSubmit}>Update Student</button>
-            <Link className="btn btn-outline-primary mt-3 ml-3" to={'/students'}>Cancel</Link>
+            <button
+              className="btn btn-outline-primary mt-3"
+              onClick={handleSubmit}
+            >
+              Update Student
+            </button>
+            <Link
+              className="btn btn-outline-primary mt-3 ml-3"
+              to={"/students"}
+            >
+              Cancel
+            </Link>
           </form>
         </div>
       </div>
     );
   }
 }
-

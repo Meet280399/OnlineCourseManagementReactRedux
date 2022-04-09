@@ -5,6 +5,7 @@ import Student from "../../model/Student";
 import { connect } from "react-redux";
 import { addStudent } from "../../redux/student/studentActions";
 import { Link } from "react-router-dom";
+import "../../css/student.css";
 
 function AddStudent(props) {
   const navigate = useNavigate();
@@ -33,26 +34,32 @@ function AddStudent(props) {
     if (state.student.studentName.trim().length <= 0) {
       studNameErr.studNameRequired = "Student Name is required";
       isValid = false;
+    } else if (typeof state.student.studentName.trim() !== "undefined") {
+      if (!state.student.studentName.trim().match(/^[a-z ,.'-]+$/i)) {
+        isValid = false;
+        studNameErr.studNameRequired = "Enter Proper Student Name";
+      }
     }
+
     if (state.student.studentEmail.trim().length <= 0) {
       studEmailErr.studEmailRequired = "Student E-Mail is required";
       isValid = false;
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+        state.student.studentEmail.trim()
+      )
+    ) {
+      studEmailErr.studEmailRequired = "Email is not valid";
     }
     if (state.student.studentAddress.trim().length <= 0) {
       studAddressErr.studAddressRequired = "Student Address is required";
       isValid = false;
     }
-    var patternMobile = RegExp(/^[0-9\b]+$/); 
     if (state.student.studentMobile.trim().length <= 0) {
       studMobileErr.studMobileRequired = "Student Mobile Number is required";
       isValid = false;
-    }
-    if (!patternMobile.test(studMobileErr)) {
-      isValid=false;
-      studMobileErr.studMobileRequired = "Please Enter Numbers Only"
-    }
-    else if (studMobileErr != 10) {
-      studMobileErr.studMobileRequired = "Please enter valid phone number."
+    } else if (state.student.studentMobile.trim().length != 10) {
+      studMobileErr.studMobileRequired = "Please 10 Digit Phone Number";
     }
 
     setStudentIdErr(studIdErr);
@@ -89,13 +96,15 @@ function AddStudent(props) {
   // });
 
   return (
-    <div>
+    <div className="add-student">
       <div>
-        <form>
-          <div>
-            <label>Enter Student Id</label>
+        <form className="studentForm">
+          <div className="studentInput">
+            <div className="label-div">
+              <label>Enter Student Id</label>
+            </div>
             <input
-              className="form-control"
+              className="form-control my-2"
               type="text"
               placeholder="Enter Student Id"
               value={state.student.studentId}
@@ -114,11 +123,18 @@ function AddStudent(props) {
               }}
             />
             {Object.keys(studIdErr).map((key) => {
-              return <div style={{ color: "red" }}>{studIdErr[key]}</div>
+              return (
+                <p className="error-message" style={{ color: "red" }}>
+                  {studIdErr[key]}
+                </p>
+              );
             })}
           </div>
-          <div>
-          <label>Enter Student Name</label>
+          <br></br>
+          <div className="studentInput">
+            <div className="label-div">
+              <label>Enter Student Name</label>
+            </div>
             <input
               className="form-control my-2"
               type="text"
@@ -134,13 +150,20 @@ function AddStudent(props) {
               }}
             />
             {Object.keys(studNameErr).map((key) => {
-              return <div key={key} style={{ color: "red" }}>{studNameErr[key]}</div>
+              return (
+                <p key={key} className="error-message" style={{ color: "red" }}>
+                  {studNameErr[key]}
+                </p>
+              );
             })}
           </div>
-          <div>
-          <label>Enter Student E-Mail</label>
+          <br></br>
+          <div className="studentInput">
+            <div className="label-div">
+              <label>Enter Student E-Mail</label>
+            </div>
             <input
-              className="form-control"
+              className="form-control my-2"
               type="text"
               placeholder="Enter Student Email"
               value={state.student.studentEmail}
@@ -154,13 +177,20 @@ function AddStudent(props) {
               }}
             />
             {Object.keys(studEmailErr).map((key) => {
-              return <div key={key} style={{ color: "red" }}>{studEmailErr[key]}</div>
+              return (
+                <p key={key} className="error-message" style={{ color: "red" }}>
+                  {studEmailErr[key]}
+                </p>
+              );
             })}
           </div>
-          <div>
-          <label>Enter Student Address</label>
+          <br></br>
+          <div className="studentInput">
+            <div className="label-div">
+              <label>Enter Student Address</label>
+            </div>
             <input
-              className="form-control"
+              className="form-control my-2"
               type="text"
               placeholder="Enter Student Address"
               value={state.student.studentAddress}
@@ -174,13 +204,20 @@ function AddStudent(props) {
               }}
             />
             {Object.keys(studAddressErr).map((key) => {
-              return <div key={key} style={{ color: "red" }}>{studAddressErr[key]}</div>
+              return (
+                <p key={key} className="error-message" style={{ color: "red" }}>
+                  {studAddressErr[key]}
+                </p>
+              );
             })}
           </div>
-          <div>
-          <label>Enter Student Mobile Number</label>
+          <br></br>
+          <div className="studentInput">
+            <div className="label-div">
+              <label>Enter Student Mobile Number</label>
+            </div>
             <input
-              className="form-control"
+              className="form-control my-2"
               type="text"
               placeholder="Enter Student Mobile Number"
               id="studentMobile"
@@ -199,11 +236,15 @@ function AddStudent(props) {
                 });
               }}
             />
-            <br></br>
             {Object.keys(studMobileErr).map((key) => {
-              return <div key={key} style={{ color: "red" }}>{studMobileErr[key]}</div>
+              return (
+                <p key={key} className="error-message" style={{ color: "red" }}>
+                  {studMobileErr[key]}
+                </p>
+              );
             })}
           </div>
+          <br></br>
           {/* <div>
             <select
               className="form-control my-2"
@@ -227,15 +268,20 @@ function AddStudent(props) {
               ))}
             </select>
           </div> */}
-          <button
-            className="btn btn-outline-primary mt-3"
-            onClick={handleClick}
-          >
-            Add Student
-          </button>
-          <Link className="btn btn-outline-primary mt-3 ml-3" to="/students">
-            Cancel
-          </Link>
+          <div className="btn-group">
+            <button
+              className="btn btn-outline-success mt-3 btn-custom"
+              onClick={handleClick}
+            >
+              Add Student
+            </button>
+            <Link
+              className="btn btn-outline-danger mt-3 ml-3 btn-custom"
+              to="/students"
+            >
+              Cancel
+            </Link>
+          </div>
         </form>
       </div>
     </div>
