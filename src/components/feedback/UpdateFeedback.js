@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
-import { Link } from "react-router-dom";
-import Feedback from "../Model/Feedback";
-import FeedbackService from "../Service/FeedbackService";
+import { useDispatch,useSelector} from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { updateFeedback } from "../../redux/feedback/feedbackAction";
+import Feedback from "../../model/Feedback";
+import FeedbackService from "../../service/FeedbackService";
 
 function UpdateFeedback() {
-  const [state, setState] = useState({ feedback: new Feedback() });
+  const feedbacks = useSelector((state) => state.feedbacks.feedbacks);
+  const dispatch = useDispatch();
+  const [feedback, setFeedback] = useState();
 
   let service = new FeedbackService();
 
@@ -13,89 +16,76 @@ function UpdateFeedback() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    service
-      .findFeedbackById(feedId)
-      .then((result) => {
-        alert("inside updated" + JSON.stringify(result.data));
-        setState({ feedback: result.data });
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  }, []);
+    setFeedback(feedbacks.find((e) => e.feedbackId == feedId));
+  }, [feedId]);
 
-  return (
-    <div>
-      <form>
-        <div>
-          <input
-            className="form-control my-2"
-            type="text"
-            id="feedbackId"
-            placeholder="Enter Feedback Id"
-            value={state.feedback.feedbackId}
-            readOnly={true}
-          />
-        </div>
-        <div>
-          <input
-            className="form-control my-2"
-            type="text"
-            id="feedbackdescription"
-            placeholder="Enter Feedback description"
-            value={state.feedback.feedbackdescription}
-            onChange={(e) => {
-              setState({
-                course: {
-                  ...state.feedback,
-                  feedbackdescription: e.target.value,
-                },
-              });
-            }}
-          />
-        </div>
-        <div>
-          <input
-            className="form-control my-2"
-            type="text"
-            id="feedbackDate"
-            placeholder="Enter feedback Date"
-            value={state.feedback.feedbackDate}
-            onChange={(e) => {
-              setState({
-                feedback: {
-                  ...state.feedback,
-                  feedbackdate: e.target.value,
-                },
-              });
-            }}
-          />
-        </div>
-        
-        <button
-          className="btn btn-outline-primary mt-3"
-          onClick={(e) => {
-            e.preventDefault();
-            service
-              .updateFeedback(state.feedback)
-              .then(() => {
-                alert("Feedback record is Updated. ");
-                setState({ feedback: new Feedback() });
-                navigate("/feedback");
-              })
-              .catch((er) => {
-                alert(er);
-              });
-          }}
-        >
-          Update Feedback
-        </button>
-        <Link className="btn btn-outline-primary mt-3 ml-3" to="/feedbacks">
-          Cancel
-        </Link>
-      </form>
-    </div>
-  );
+  return feedback ? createForm(feedback) : <div>Loading</div>;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(updateFeedback(feedback));
+    navigate("/feedbacks");
+  }
+
+  function createForm(feedback) {
+    return (
+      <div>
+        <form>
+          <div>
+            <input
+              className="form-control"
+              onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+              type="text"
+              id="feedbackId"
+              placeholder="Enter Feedback Id"
+              value={feedback.feedbackId}
+              readOnly={true}
+            />
+          </div>
+          <div>
+            <input
+              className="form-control "
+              type="text"
+              id="description"
+              placeholder="Enter description"
+              value={feedback.description}
+              onChange={(e) => {
+                setFeedback({
+                    ...feedback,
+                    description: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <input
+              className="form-control my-2"
+              type="text"
+              id="feedbackDate"
+              placeholder="Enter feedback Date"
+              value={feedback.feedbackDate}
+              onChange={(e) => {
+                setFeedback({
+                    ...feedback,
+                    feedbackDate: e.target.value,
+                });
+              }}
+            />
+          </div>
+
+          <button
+            className="btn btn-outline-primary mt-3"
+            onClick={handleSubmit}
+          >
+            Update Feedback
+          </button>
+          <Link className="btn btn-outline-primary mt-3 ml-3" to="/feedbacks">
+            Cancel
+          </Link>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default UpdateFeedback;

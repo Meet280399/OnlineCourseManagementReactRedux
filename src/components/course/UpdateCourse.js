@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import Course from "../../model/Course";
+// import Course from "../../model/Course";
 import CourseService from "../../service/CourseService";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateCourse } from '../../redux/course/courseAction'
 
 function UpdateCourse() {
-  const [state, setState] = useState({ course: new Course() });
+  const courses = useSelector((state) => state.courses.courses);
+  const dispatch = useDispatch();
+  const [course, setCourse] = useState();
 
   let service = new CourseService();
 
@@ -13,89 +18,76 @@ function UpdateCourse() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    service
-      .findCourseById(courId)
-      .then((result) => {
-        alert("inside updated" + JSON.stringify(result.data));
-        setState({ course: result.data });
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  }, []);
+    setCourse(courses.find((e) => e.courseId == courId));
+  }, [courId]);
 
-  return (
-    <div>
-      <form>
-        <div>
-          <input
-            className="form-control"
-            type="text"
-            id="courseId"
-            placeholder="Enter Course Id"
-            value={state.course.courseId}
-            readOnly={true}
-          />
-        </div>
-        <div>
-          <input
-            className="form-control my-2"
-            type="text"
-            id="courseName"
-            placeholder="Enter Course Name"
-            value={state.course.courseName}
-            onChange={(e) => {
-              setState({
-                course: {
-                  ...state.course,
-                  courseName: e.target.value,
-                },
-              });
-            }}
-          />
-        </div>
-        <div>
-          <input
-            className="form-control my-2"
-            type="text"
-            id="courseDuration"
-            placeholder="Enter Course Duration"
-            value={state.course.courseDuration}
-            onChange={(e) => {
-              setState({
-                course: {
-                  ...state.course,
-                  courseDuration: e.target.value,
-                },
-              });
-            }}
-          />
-        </div>
-        
-        <button
-          className="btn btn-outline-primary mt-3"
-          onClick={(e) => {
-            e.preventDefault();
-            service
-              .updateCourse(state.course)
-              .then(() => {
-                alert("Course record is Updated. ");
-                setState({ course: new Course() });
-                navigate("/courses");
-              })
-              .catch((er) => {
-                alert(er);
-              });
-          }}
-        >
-          Update Course
-        </button>
-        <Link className="btn btn-outline-primary mt-3 ml-3" to="/courses">
-          Cancel
-        </Link>
-      </form>
-    </div>
-  );
+  return course ? createForm(course) : <div>Loading</div>;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(updateCourse(course));
+    navigate("/courses");
+  }
+
+  function createForm(course) {
+    return (
+      <div>
+        <form>
+          <div>
+            <input
+              className="form-control"
+              type="text"
+              id="courseId"
+              placeholder="Enter Course Id"
+              value={course.courseId}
+              readOnly={true}
+            />
+          </div>
+          <div>
+            <input
+              className="form-control my-2"
+              type="text"
+              id="courseName"
+              placeholder="Enter Course Name"
+              value={course.courseName}
+              onChange={(e) => {
+                setCourse({
+                    ...course,
+                    courseName: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <input
+              className="form-control my-2"
+              type="text"
+              id="courseDuration"
+              placeholder="Enter Course Duration"
+              value={course.courseDuration}
+              onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+              onChange={(e) => {
+                setCourse({
+                    ...course,
+                    courseDuration: e.target.value,
+                });
+              }}
+            />
+          </div>
+
+          <button
+            className="btn btn-outline-primary mt-3"
+            onClick={handleSubmit}
+          >
+            Update Course
+          </button>
+          <Link className="btn btn-outline-primary mt-3 ml-3" to="/courses">
+            Cancel
+          </Link>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default UpdateCourse;

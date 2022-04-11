@@ -96,10 +96,10 @@ function AddStudent(props) {
   // });
 
   return (
-    <div className="add-student">
+    <div className="add">
       <div>
-        <form className="studentForm">
-          <div className="studentInput">
+        <form className="addForm">
+          <div className="addInput">
             <div className="label-div">
               <label>Enter Student Id</label>
             </div>
@@ -131,7 +131,7 @@ function AddStudent(props) {
             })}
           </div>
           <br></br>
-          <div className="studentInput">
+          <div className="addInput">
             <div className="label-div">
               <label>Enter Student Name</label>
             </div>
@@ -158,7 +158,7 @@ function AddStudent(props) {
             })}
           </div>
           <br></br>
-          <div className="studentInput">
+          <div className="addInput">
             <div className="label-div">
               <label>Enter Student E-Mail</label>
             </div>

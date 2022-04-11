@@ -2,7 +2,7 @@ import axios from "axios";
 
 class CourseService {
   baseUrl = `http://localhost:8090/onlinecoursemanagement/rest/courses`;
-  baseStudentUrl = `http://localhost:8090/onlinecoursemanagement/rest/students`;
+  // baseStudentUrl = `http://localhost:8090/onlinecoursemanagement/rest/students`;
 
   getAllCourses() {
     // alert("inside get all course")

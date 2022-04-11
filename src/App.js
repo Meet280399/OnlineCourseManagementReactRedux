@@ -11,6 +11,11 @@ import FeedbackHome from "./components/feedback/FeedbackHome";
 import AddSubject from "./components/subject/AddSubject";
 import AddStudent from './components/student/AddStudent';
 import UpdateStudent from './components/student/UpdateStudent';
+import UpdateSubject from './components/subject/UpdateSubject';
+import AddInstructor from './components/instructor/AddInstructor';
+import UpdateInstructor from './components/instructor/UpdateInstructor';
+import AddFeedback from './components/feedback/AddFeedback';
+import UpdateFeedback from './components/feedback/UpdateFeedback';
 
 function App() {
   return (
@@ -28,6 +33,8 @@ function App() {
         <Link to={`/subjects/add`}>Add Subjects</Link>
         <br></br>
         <Link to={`/instructors`}>Show Instructor</Link>
+        <br></br>
+        <Link to={`/instructors/add`}>Add Instructor</Link>
         <br></br>
         <Link to={`/feedbacks`}>Show Feedback</Link>
         <Routes>
@@ -50,12 +57,18 @@ function App() {
           {/* routing for subject module  */}
           <Route exact path="/subjects" element={<SubjectHome />} />
           <Route exact path="/subjects/add" element={<AddSubject />} />
+          <Route exact path="/subjects/update/:subId" element={<UpdateSubject />} />
+
 
           {/* routing for instructor module  */}
           <Route exact path="/instructors" element={<InstructorHome />} />
+          <Route exact path="/instructors/add" element={<AddInstructor />} />
+          <Route exact path="/instructors/update/:instId" element={<UpdateInstructor />} />
 
           {/* routing for feedback module  */}
           <Route exact path="/feedbacks" element={<FeedbackHome />} />
+          <Route exact path="/feedbacks/add" element={<AddFeedback />} />
+          <Route exact path="/feedbacks/update/:feedId" element={<UpdateFeedback />} />
         </Routes>
       </Router>
     </div>

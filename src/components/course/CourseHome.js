@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteCourse, fetchCourses } from '../../redux/course/courseAction';
+import { deleteCourse, fetchCourses } from "../../redux/course/courseAction";
 function CourseHome({ coursesData, fetchCourses, deleteCour }) {//bcm prop of comp
 
     useEffect(() => {
@@ -19,9 +19,8 @@ function CourseHome({ coursesData, fetchCourses, deleteCour }) {//bcm prop of co
                     <tr>
                         <th scope="col">Course Id</th>
                         <th scope="col">Course Name</th>
-                        <th scope ="col">Course Duration</th>
-                        {/* <th scope="col">Student Name</th> */}
-                       
+                        <th scope="col">Course Duration (Hrs.)</th>
+
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -29,11 +28,10 @@ function CourseHome({ coursesData, fetchCourses, deleteCour }) {//bcm prop of co
 
                     {coursesData.courses.map((course, index) => (
                         <tr key={index}>
-                            {console.log("Course" + JSON.stringify(course))}
                             <td>{course.courseId}</td>
                             <td>{course.courseName}</td>
                             <td>{course.courseDuration}</td>
-                            {/* <td> {course.student.studentName} </td> */}
+
                             <td>
                                 <Link
                                     className="btn btn-outline-primary mr-2"
@@ -66,4 +64,3 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CourseHome);
-

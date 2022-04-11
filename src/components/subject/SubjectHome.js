@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteSubject, fetchSubjects } from "../../redux/subject/subjectActions";
-function SubjectHome({ subjectsData, fetchSubjects, deleteSub }) {//bcm prop of comp
+function Home({ subjectsData, fetchSubjects, deleteSub }) {//bcm prop of comp
 
     useEffect(() => {
         fetchSubjects();
@@ -61,5 +61,4 @@ const mapDispatchToProps = (dispatch) => {
         deleteSub: (subId) => { dispatch(deleteSubject(subId)) },
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(SubjectHome);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
