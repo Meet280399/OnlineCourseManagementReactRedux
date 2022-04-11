@@ -23,6 +23,10 @@ class InstructorService {
     getAllFeedback() {
         return axios.get(this.baseUrl + '/getAllFeedbacks');
     }
+
+    checkLogin(loginInstructor) {
+        return axios.post(this.baseUrl + '/checkInstructorLogin', loginInstructor)
+    }
     
 }
 export default InstructorService;

@@ -32,6 +32,10 @@ class StudentService {
   // getAllCourse() {
   //   return axios.get(this.baseCourseUrl);
   // }
+
+  checkLogin(loginStudent) {
+    return axios.post(this.baseUrl + "/checkStudentLogin", loginStudent)
+  }
 }
 
 export default StudentService;
