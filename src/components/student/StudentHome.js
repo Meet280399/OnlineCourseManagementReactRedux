@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchStudents } from "../../redux/student/studentActions";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import { deleteStudent } from "../../redux/student/studentActions";
+import { NavbarStudent } from "../NavbarStudent";
 
 function StudentHome({ studentsData, fetchStudents, deleteStud }) {
   useEffect(() => {
@@ -31,7 +32,6 @@ function StudentHome({ studentsData, fetchStudents, deleteStud }) {
             <th scope="col">Student E-Mail</th>
             <th scope="col">Student Address</th>
             <th scope="col">Student Mobile Number</th>
-            <th scope="col">Student Course</th>
             <th>Action</th>
           </tr>
         </thead>

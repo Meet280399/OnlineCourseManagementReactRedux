@@ -35,34 +35,34 @@ export default function UpdateStudent() {
     //   studIdErr.studIdRequired = "Student Id is required";
     //   isValid = false;
     // }
-    if (student.studentName.trim().length <= 0) {
+    if (student.studentName.length <= 0) {
       studNameErr.studNameRequired = "Student Name is required";
       isValid = false;
-    } else if (typeof student.studentName.trim() !== "undefined") {
-      if (!student.studentName.trim().match(/^[a-z ,.'-]+$/i)) {
+    } else if (typeof student.studentName !== "undefined") {
+      if (!student.studentName.match(/^[a-z ,.'-]+$/i)) {
         isValid = false;
         studNameErr.studNameRequired = "Enter Proper Student Name";
       }
     }
 
-    if (student.studentEmail.trim().length <= 0) {
+    if (student.studentEmail.length <= 0) {
       studEmailErr.studEmailRequired = "Student E-Mail is required";
       isValid = false;
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
-        student.studentEmail.trim()
+        student.studentEmail
       )
     ) {
       studEmailErr.studEmailRequired = "Email is not valid";
     }
-    if (student.studentAddress.trim().length <= 0) {
+    if (student.studentAddress.length <= 0) {
       studAddressErr.studAddressRequired = "Student Address is required";
       isValid = false;
     }
-    if (student.studentMobile.trim().length <= 0) {
+    if (student.studentMobile.length <= 0) {
       studMobileErr.studMobileRequired = "Student Mobile Number is required";
       isValid = false;
-    } else if (student.studentMobile.trim().length != 10) {
+    } else if (!student.studentMobile.length > 10) {
       studMobileErr.studMobileRequired = "Please 10 Digit Phone Number";
     }
 

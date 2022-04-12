@@ -1,0 +1,43 @@
+/* .student-login {
+    display: block;
+} */
+
+/* #student-login-none {
+    display: none;
+} */
+
+.form-login {
+  margin: 0 auto;
+  display: table;
+  width: 40%;
+}
+.login-header {
+  text-align: center;
+}
+.middle-btn {
+  text-align: center;
+}
+
+.form-login span {
+  color: red;
+}
+
+.form-login .row {
+  margin: 10px 5px;
+}
+
+.form-login label {
+  vertical-align: sub;
+}
+
+a.users-style {
+  font-size: 20px;
+  color: black;
+  font-weight: 500;
+  margin: 10px 12px;
+}
+
+a.users-style:hover {
+  color: rgb(56, 117, 222);
+  text-decoration: none;
+}

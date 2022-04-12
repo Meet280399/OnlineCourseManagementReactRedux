@@ -19,19 +19,27 @@ import UpdateFeedback from "./components/feedback/UpdateFeedback";
 import StudentLogin from "./components/login/StudentLogin";
 import { Navbar } from "./components/Navbar";
 import InstructorLogin from './components/login/InstructorLogin';
+import LoginPage from "./components/LoginPage";
+import { NavbarStudent } from "./components/NavbarStudent";
+// import { ReactDOM } from 'react-dom';
 
 function App() {
+
+  //  const changeNavlink = () => {
+  //   let element = document.getElementById('student-login')
+  //   .findDOMNode(element).style.display = this.state.isClicked ? 'none' : 'flex'
+  // }
+
   return (
     <div>
       <Router>
       <Header title="React Online Course Management System" />
-      <NavLink to='/loginStudent'>Student User</NavLink>
-      <NavLink to='/loginInstructor'>Instructor User</NavLink>
-
       <Routes>
+        <Route exact path='/' element={<LoginPage />} />
         <Route exact path='/loginStudent' element={<StudentLogin />} />
         <Route exact path='/loginInstructor' element={<InstructorLogin />} />
-        <Route exact path="/students" element={<StudentHome />} />
+        <Route exact path='/students' element={<NavbarStudent />} />
+        <Route exact path="/students/show" element={<StudentHome />} />
         <Route exact path='/students/add' element={<AddStudent />} />
         <Route exact path='/students/update/:studId' element={<UpdateStudent />} />
       </Routes>

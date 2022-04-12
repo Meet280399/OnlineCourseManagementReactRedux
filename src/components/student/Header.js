@@ -1,3 +1,5 @@
+import { NavbarStudent } from './../NavbarStudent';
+
 function Header(props) {
   return (
     <div className="jumbotron">
@@ -6,6 +8,9 @@ function Header(props) {
         <p className="my-4">
             {props.description}
         </p>
+
+      <NavbarStudent />
+
     </div>
   )
 }
