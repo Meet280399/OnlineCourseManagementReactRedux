@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import App from "../../App";
-import InstructorService from "../../service/InstructorService";
-import LoginInstructor from "./../../model/LoginInstructor";
+// import App from "../../App";
+import InstructorService from "../../service/InstructorService.js";
+import LoginInstructor from "./../../model/LoginInstructor.js";
 
 function InstructorLogin() {
   const navigate = useNavigate();

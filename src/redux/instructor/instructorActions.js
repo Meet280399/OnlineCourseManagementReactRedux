@@ -1,5 +1,5 @@
 
-import InstructorService from "../../service/InstructorService";
+import InstructorService from "../../service/InstructorService.js";
 import {
     FETCH_INSTRUCTORS_REQUEST,
     FETCH_INSTRUCTORS_SUCCESS,
@@ -8,7 +8,7 @@ import {
     UPDATE_INSTRUCTOR_REQUEST,
     ADD_INSTRUCTOR_REQUEST,
     SEARCH_INSTRUCTORS_REQUEST
-} from "./instructorTypes";
+} from "./instructorTypes.js";
 
 export const fetchInstructorsRequest = () => {
     return {

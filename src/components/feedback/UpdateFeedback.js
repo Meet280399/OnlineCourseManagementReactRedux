@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 // import FeedbackService from '../../Service/FeedbackService';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { updateFeedback } from "../../redux/feedback/feedbackAction";
+import { updateFeedback } from "../../redux/feedback/feedbackAction.js";
+import { NavbarInstructor } from "../NavbarInstructor.js";
 // import Feedback from '../Model/Feedback';
 
 export default function UpdateFeedback() {
@@ -75,94 +76,97 @@ export default function UpdateFeedback() {
 
   function createForm(feedback) {
     return (
-      <div className="row">
-        <div className="col-md-6 mx-auto">
-          <h2>Update Feedback</h2>
-          <form>
-            <div>
-              <input
-                className="form-control"
-                type="text"
-                id="feedbackId"
-                placeholder="Enter Feedback Id"
-                value={feedback.feedbackId}
-                readOnly={true}
-              />
-            </div>
-            <br></br>
-            <div>
-              {/* <div className="alert-danger">{error.nameError}</div> */}
-              <input
-                className="form-control my-2"
-                type="text"
-                id="description"
-                placeholder="Enter Feedback description"
-                value={feedback.description}
-                onChange={(e) =>
-                  setFeedback({
-                    ...feedback,
-                    description: e.target.value,
-                  })
-                }
-              />
-              {Object.keys(feeddescriptionErr).map((key) => {
-                return (
-                  <p
-                    feedback={feedback}
-                    key={feedback.description}
-                    className="error-message"
-                    style={{ color: "red" }}
-                  >
-                    {feeddescriptionErr[key]}
-                  </p>
-                );
-              })}
-            </div>
-            <br></br>
-            <div>
-              {/* <div className="alert-danger">{error.DateError}</div> */}
-              <input
-                className="form-control my-2"
-                type="text"
-                id="feedbackDate"
-                placeholder="Enter Feedback Date"
-                value={feedback.feedbackDate}
-                onChange={(e) =>
-                  setFeedback({
-                    ...feedback,
-                    feedbackDate: e.target.value,
-                  })
-                }
-              />
-              {Object.keys(feedDateErr).map((key) => {
-                return (
-                  <p
-                    feedback={feedback}
-                    key={feedback.feedbackDate}
-                    className="error-message"
-                    style={{ color: "red" }}
-                  >
-                    {feedDateErr[key]}
-                  </p>
-                );
-              })}
-            </div>
-            <br></br>
-            <button
-              className="btn btn-outline-primary mt-3"
-              onClick={handleSubmit}
-            >
-              Update Feedback
-            </button>
-            <Link
-              className="btn btn-outline-primary mt-3 ml-3"
-              to={"/feedbacks"}
-            >
-              Cancel
-            </Link>
-          </form>
+      <>
+        <NavbarInstructor />
+        <div className="row">
+          <div className="col-md-6 mx-auto">
+            <h2>Update Feedback</h2>
+            <form>
+              <div>
+                <input
+                  className="form-control"
+                  type="text"
+                  id="feedbackId"
+                  placeholder="Enter Feedback Id"
+                  value={feedback.feedbackId}
+                  readOnly={true}
+                />
+              </div>
+              <br></br>
+              <div>
+                {/* <div className="alert-danger">{error.nameError}</div> */}
+                <input
+                  className="form-control my-2"
+                  type="text"
+                  id="description"
+                  placeholder="Enter Feedback description"
+                  value={feedback.description}
+                  onChange={(e) =>
+                    setFeedback({
+                      ...feedback,
+                      description: e.target.value,
+                    })
+                  }
+                />
+                {Object.keys(feeddescriptionErr).map((key) => {
+                  return (
+                    <p
+                      feedback={feedback}
+                      key={feedback.description}
+                      className="error-message"
+                      style={{ color: "red" }}
+                    >
+                      {feeddescriptionErr[key]}
+                    </p>
+                  );
+                })}
+              </div>
+              <br></br>
+              <div>
+                {/* <div className="alert-danger">{error.DateError}</div> */}
+                <input
+                  className="form-control my-2"
+                  type="text"
+                  id="feedbackDate"
+                  placeholder="Enter Feedback Date"
+                  value={feedback.feedbackDate}
+                  onChange={(e) =>
+                    setFeedback({
+                      ...feedback,
+                      feedbackDate: e.target.value,
+                    })
+                  }
+                />
+                {Object.keys(feedDateErr).map((key) => {
+                  return (
+                    <p
+                      feedback={feedback}
+                      key={feedback.feedbackDate}
+                      className="error-message"
+                      style={{ color: "red" }}
+                    >
+                      {feedDateErr[key]}
+                    </p>
+                  );
+                })}
+              </div>
+              <br></br>
+              <button
+                className="btn btn-outline-primary mt-3"
+                onClick={handleSubmit}
+              >
+                Update Feedback
+              </button>
+              <Link
+                className="btn btn-outline-primary mt-3 ml-3"
+                to={"/feedbacks"}
+              >
+                Cancel
+              </Link>
+            </form>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

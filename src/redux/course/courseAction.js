@@ -1,4 +1,4 @@
-import CourseService from "../../service/CourseService";
+import CourseService from "../../service/CourseService.js";
 import {
     FETCH_COURSES_REQUEST,
     FETCH_COURSES_SUCCESS,
@@ -7,7 +7,7 @@ import {
     UPDATE_COURSE_REQUEST,
     ADD_COURSE_REQUEST,
     SEARCH_COURSES_REQUEST
-} from "./courseTypes";
+} from "./courseTypes.js";
 
 export const fetchCoursesRequest = () => {
     return {

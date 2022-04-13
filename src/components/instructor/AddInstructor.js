@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router";
 //import { useEffect, useState } from "react";
 import React, { useState } from "react";
-import Instructor from "../../model/Instructor";
-import InstructorService from "../../service/InstructorService";
-import { Link } from "react-router-dom";
-import { addInstructor } from "../../redux/instructor/instructorActions";
+import Instructor from "../../model/Instructor.js";
+import InstructorService from "../../service/InstructorService.js";
+import { Link, NavLink } from "react-router-dom";
+import { addInstructor } from "../../redux/instructor/instructorActions.js";
 import { connect } from "react-redux";
+import "../../css/login.css";
+import { NavbarAdmin } from './../NavbarAdmin.js';
 
 function AddInstructor(props) {
   const navigate = useNavigate();
@@ -67,7 +69,7 @@ function AddInstructor(props) {
       instMobileNoErr.instMobileNoRequired =
         "Instructor mobile number is Required";
       isValid = false;
-    } else if (state.instructor.mobileNo.trim().length != 10) {
+    } else if (!state.instructor.mobileNo.trim().length > 10) {
       instMobileNoErr.instMobileNoRequired = "Please 10 Digit Phone Number";
     }
 
@@ -101,177 +103,180 @@ function AddInstructor(props) {
 
   // const [feedbacks, setFeedbacks] = useState([]);
   return (
-    <div className="add">
-      <div>
-        <form className="addForm">
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Instructor Id</label>
+    <>
+      <NavbarAdmin />
+      <div className="add">
+        <div className="container container-center">
+          <h2 className="login-header">Add a Instructor</h2>
+          <form>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Instructor Id</label>
+              </div>
+              <input
+                className="form-control col-md-8"
+                onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                type="text"
+                placeholder="Instructor Id"
+                value={state.instructor.instructorId}
+                onChange={(u) => {
+                  setState({
+                    instructor: {
+                      ...state.instructor,
+                      instructorId: u.target.value,
+                    },
+                  });
+                }}
+              />
+              {Object.keys(instIdErr).map((key) => {
+                return (
+                  <p className="error-message" style={{ color: "red" }}>
+                    {instIdErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-              type="text"
-              placeholder="Instructor Id"
-              value={state.instructor.instructorId}
-              onChange={(u) => {
-                setState({
-                  instructor: {
-                    ...state.instructor,
-                    instructorId: u.target.value,
-                  },
-                });
-              }}
-            />
-            {Object.keys(instIdErr).map((key) => {
-              return (
-                <p className="error-message" style={{ color: "red" }}>
-                  {instIdErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Instructor Name</label>
-            </div>
-            <input
-              className="form-control my-2"
-              type="text"
-              placeholder="Instructor Name"
-              value={state.instructor.name}
-              onChange={(u) =>
-                setState({
-                  instructor: {
-                    ...state.instructor,
-                    name: u.target.value,
-                  },
-                })
-              }
-            />
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Instructor Name</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                type="text"
+                placeholder="Instructor Name"
+                value={state.instructor.name}
+                onChange={(u) =>
+                  setState({
+                    instructor: {
+                      ...state.instructor,
+                      name: u.target.value,
+                    },
+                  })
+                }
+              />
 
-            {Object.keys(instNameErr).map((key) => {
-              return (
-                <p className="error-message" style={{ color: "red" }}>
-                  {instNameErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Instructor E-Mail</label>
+              {Object.keys(instNameErr).map((key) => {
+                return (
+                  <p className="error-message" style={{ color: "red" }}>
+                    {instNameErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Instructor Email"
-              value={state.instructor.email}
-              onChange={(u) =>
-                setState({
-                  instructor: {
-                    ...state.instructor,
-                    email: u.target.value,
-                  },
-                })
-              }
-            />
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Instructor E-Mail</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                type="text"
+                placeholder="Instructor Email"
+                value={state.instructor.email}
+                onChange={(u) =>
+                  setState({
+                    instructor: {
+                      ...state.instructor,
+                      email: u.target.value,
+                    },
+                  })
+                }
+              />
 
-            {Object.keys(instEmailErr).map((key) => {
-              return (
-                <p className="error-message" style={{ color: "red" }}>
-                  {instEmailErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Instructor Mobile Number</label>
+              {Object.keys(instEmailErr).map((key) => {
+                return (
+                  <p className="error-message" style={{ color: "red" }}>
+                    {instEmailErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Instructor MobileNo"
-              value={state.instructor.mobileNo}
-              onChange={(u) => {
-                setState({
-                  instructor: {
-                    ...state.instructor,
-                    mobileNo: u.target.value,
-                  },
-                });
-              }}
-            />
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Instructor Mobile Number</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                type="text"
+                placeholder="Instructor MobileNo"
+                value={state.instructor.mobileNo}
+                onChange={(u) => {
+                  setState({
+                    instructor: {
+                      ...state.instructor,
+                      mobileNo: u.target.value,
+                    },
+                  });
+                }}
+              />
 
-            {Object.keys(instMobileNoErr).map((key) => {
-              return (
-                <p className="error-message" style={{ color: "red" }}>
-                  {instMobileNoErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Instructor Salary</label>
+              {Object.keys(instMobileNoErr).map((key) => {
+                return (
+                  <p className="error-message" style={{ color: "red" }}>
+                    {instMobileNoErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Instructor Salary In Rupees"
-              value={state.instructor.salary}
-              onChange={(u) => {
-                setState({
-                  instructor: {
-                    ...state.instructor,
-                    salary: u.target.value,
-                  },
-                });
-              }}
-            />
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Instructor Salary</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                type="text"
+                placeholder="Instructor Salary In Rupees"
+                value={state.instructor.salary}
+                onChange={(u) => {
+                  setState({
+                    instructor: {
+                      ...state.instructor,
+                      salary: u.target.value,
+                    },
+                  });
+                }}
+              />
 
-            {Object.keys(instSalaryErr).map((key) => {
-              return (
-                <p className="error-message" style={{ color: "red" }}>
-                  {instSalaryErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Instructor Grades</label>
+              {Object.keys(instSalaryErr).map((key) => {
+                return (
+                  <p className="error-message" style={{ color: "red" }}>
+                    {instSalaryErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Instructor Grades"
-              value={state.instructor.grades}
-              onChange={(u) => {
-                setState({
-                  instructor: {
-                    ...state.instructor,
-                    grades: u.target.value,
-                  },
-                });
-              }}
-            />
-            {Object.keys(instGradesErr).map((key) => {
-              return (
-                <p className="error-message" style={{ color: "red" }}>
-                  {instGradesErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          {/* <div>
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Instructor Grades</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                type="text"
+                placeholder="Instructor Grades"
+                value={state.instructor.grades}
+                onChange={(u) => {
+                  setState({
+                    instructor: {
+                      ...state.instructor,
+                      grades: u.target.value,
+                    },
+                  });
+                }}
+              />
+              {Object.keys(instGradesErr).map((key) => {
+                return (
+                  <p className="error-message" style={{ color: "red" }}>
+                    {instGradesErr[key]}
+                  </p>
+                );
+              })}
+            </div>
+            <br></br>
+            {/* <div>
                 <select
                             className="form-control my-2"
                             value={state.instructor.feedback.feedbackId}
@@ -288,7 +293,7 @@ function AddInstructor(props) {
                         <br></br>
                 </div> */}
 
-          {/* <button
+            {/* <button
             className="btn btn-outline-primary mt-3"
             onClick={(e) => {
               e.preventDefault();
@@ -311,18 +316,24 @@ function AddInstructor(props) {
           > Add Instructor
           </button> */}
 
-          <button
-            className="btn btn-outline-success mt-3 btn-custom"
-            onClick={handleClick}
-          >
-            Add Instructor
-          </button>
-          <Link className="btn btn-outline-danger mt-3 ml-3 btn-custom" to="/instructors">
-            Cancel
-          </Link>
-        </form>
+            <div className="btn-group">
+              <button
+                className="btn btn-outline-success mt-3 btn-custom"
+                onClick={handleClick}
+              >
+                Add Instructor
+              </button>
+              <Link
+                className="btn btn-outline-danger mt-3 ml-3 btn-custom"
+                to="/admin"
+              >
+                Cancel
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

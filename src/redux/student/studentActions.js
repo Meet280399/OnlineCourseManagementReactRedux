@@ -1,4 +1,4 @@
-import StudentService from "./../../service/StudentService";
+import StudentService from "./../../service/StudentService.js";
 import {
   FETCH_STUDENTS_REQUEST,
   FETCH_STUDENTS_SUCCESS,
@@ -7,7 +7,7 @@ import {
   DELETE_STUDENT_REQUEST,
   ADD_STUDENT_REQUEST,
   SEARCH_STUDENTS_REQUEST,
-} from "./studentTypes";
+} from "./studentTypes.js";
 
 export const fetchStudentsRequest = () => {
   return {

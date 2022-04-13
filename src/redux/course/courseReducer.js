@@ -7,7 +7,7 @@ import {
     UPDATE_COURSE_REQUEST,
     ADD_COURSE_REQUEST,
     SEARCH_COURSES_REQUEST
-} from "./courseTypes";
+} from "./courseTypes.js";
 
 const initialState = {
     loading: false,

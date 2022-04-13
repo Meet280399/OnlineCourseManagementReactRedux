@@ -6,7 +6,7 @@ import {
     UPDATE_SUBJECT_REQUEST,
     ADD_SUBJECT_REQUEST,
     SEARCH_SUBJECTS_REQUEST
-} from "./subjectTypes";
+} from "./subjectTypes.js";
 
 const initialState = {
     loading: false,

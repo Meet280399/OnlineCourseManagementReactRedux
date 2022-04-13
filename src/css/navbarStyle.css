@@ -1,0 +1,18 @@
+a.nav-style {
+  color: black;
+  margin: 10px 12px;
+  font-size: 17px;
+  font-weight: 300;
+}
+
+nav.navbar-style {
+  background-color: aliceblue;
+  padding: 20px 10px;
+  margin-bottom: 20px;
+}
+
+a.nav-style:hover {
+    text-decoration: none;
+    /* color: black; */
+    font-weight: 500;
+}

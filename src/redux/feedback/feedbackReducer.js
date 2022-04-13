@@ -7,7 +7,7 @@ import {
     UPDATE_FEEDBACK_REQUEST,
     ADD_FEEDBACK_REQUEST,
     SEARCH_FEEDBACKS_REQUEST
-} from "./feedbackType";
+} from "./feedbackType.js";
 
 const initialState = {
     loading: false,

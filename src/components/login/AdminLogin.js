@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginStudent from "../../model/LoginStudent.js";
-import StudentService from "../../service/StudentService.js";
+import LoginAdmin from "../../model/LoginAdmin.js";
+import AdminService from "../../service/AdminService.js";
 import "../../css/login.css";
+// import { useHistory } from "react-router-dom";
 // import { ReactDOM } from 'react-dom';
 
-function StudentLogin() {
+function AdminLogin() {
   const navigate = useNavigate();
 
-  let service = new StudentService();
+  let service = new AdminService();
   // const [state, setState] = useState({ student: new Student() });
   const [loginState, setLoginState] = useState({
-    loginStudent: new LoginStudent(),
+    loginAdmin: new LoginAdmin(),
   });
   // const [style, setStyle] = useState("student-login");
 
@@ -22,24 +23,24 @@ function StudentLogin() {
   return (
     <div className="container">
       <div className="student-login">
-        <h2 className="login-header">Login Page</h2>
+        <h2 className="login-header">Admin Login</h2>
         <form className="form-login">
           <div className="row">
             <div className="col-md-4">
               <label>
-                E-Mail <span>*</span>
+                Username <span>*</span>
               </label>
             </div>
             <input
               className="form-control col-md-8"
               type="text"
-              placeholder="Enter Student Email"
-              value={loginState.loginStudent.studentEmail}
+              placeholder="Admin Username"
+              value={loginState.loginAdmin.userName}
               onChange={(e) => {
                 setLoginState({
-                  loginStudent: {
-                    ...loginState.loginStudent,
-                    studentEmail: e.target.value,
+                  loginAdmin: {
+                    ...loginState.loginAdmin,
+                    userName: e.target.value,
                   },
                 });
               }}
@@ -56,11 +57,11 @@ function StudentLogin() {
               className="form-control col-md-8"
               type="password"
               placeholder="Enter password"
-              value={loginState.loginStudent.password}
+              value={loginState.loginAdmin.password}
               onChange={(e) => {
                 setLoginState({
-                  loginStudent: {
-                    ...loginState.loginStudent,
+                  loginAdmin: {
+                    ...loginState.loginAdmin,
                     password: e.target.value,
                   },
                 });
@@ -75,10 +76,10 @@ function StudentLogin() {
             onClick={(e) => {
               e.preventDefault();
               service
-                .checkLogin(loginState.loginStudent)
+                .checkLogin(loginState.loginAdmin)
                 .then((result) => {
-                  alert("Login Successfull");
-                  navigate("/students");
+                  alert("Admin Access");
+                  navigate("/admin");
                 })
                 .catch((error2) => {
                   alert(error2);
@@ -100,4 +101,4 @@ function StudentLogin() {
   );
 }
 
-export default StudentLogin;
+export default AdminLogin;

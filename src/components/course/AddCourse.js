@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Course from "../../model/Course";
-import { addCourse } from "../../redux/course/courseAction";
-import CourseService from "../../service/CourseService";
-import { Link } from "react-router-dom";
+import Course from "../../model/Course.js";
+import { addCourse } from "../../redux/course/courseAction.js";
+import CourseService from "../../service/CourseService.js";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import "../../css/login.css";
+import { NavbarAdmin } from "../NavbarAdmin.js";
 
 function AddCourse(props) {
   const navigate = useNavigate();
@@ -80,96 +82,107 @@ function AddCourse(props) {
   }
 
   return (
-    <div className="add">
-      <div>
-        <form className="addForm">
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Course Id</label>
+    <>
+      <NavbarAdmin />
+      <div className="add">
+        <div className="container container-center">
+          <h2 className="login-header">Add a Course</h2>
+          <form>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Course Id</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                type="text"
+                placeholder="courseId"
+                value={state.course.courseId}
+                onChange={(u) => {
+                  setState({
+                    course: {
+                      ...state.course,
+                      //...state.course.project,
+                      courseId: u.target.value,
+                    },
+                  });
+                }}
+              />
+              {Object.keys(courIdErr).map((key) => {
+                return (
+                  <p className="error-message" style={{ color: "red" }}>
+                    {courIdErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-              type="text"
-              placeholder="courseId"
-              value={state.course.courseId}
-              onChange={(u) => {
-                setState({
-                  course: {
-                    ...state.course,
-                    //...state.course.project,
-                    courseId: u.target.value,
-                  },
-                });
-              }}
-            />
-            {Object.keys(courIdErr).map((key) => {
-              return (
-                <p className="error-message" style={{ color: "red" }}>
-                  {courIdErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Course Name</label>
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Course Name</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                type="text"
+                placeholder="CourseName"
+                value={state.course.courseName}
+                onChange={(u) =>
+                  setState({
+                    course: {
+                      ...state.course,
+                      // ...state.course.project,
+                      courseName: u.target.value,
+                    },
+                  })
+                }
+              />
+              {Object.keys(courNameErr).map((key) => {
+                return (
+                  <p
+                    className="error-message"
+                    key={key}
+                    style={{ color: "red" }}
+                  >
+                    {courNameErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control my-2"
-              type="text"
-              placeholder="CourseName"
-              value={state.course.courseName}
-              onChange={(u) =>
-                setState({
-                  course: {
-                    ...state.course,
-                    // ...state.course.project,
-                    courseName: u.target.value,
-                  },
-                })
-              }
-            />
-            {Object.keys(courNameErr).map((key) => {
-              return (
-                <p className="error-message" key={key} style={{ color: "red" }}>
-                  {courNameErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Course Duration</label>
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Course Duration</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                type="text"
+                placeholder="courseDuration"
+                value={state.course.courseDuration}
+                onChange={(u) =>
+                  setState({
+                    course: {
+                      ...state.course,
+                      //...state.course.project,
+                      courseDuration: u.target.value,
+                    },
+                  })
+                }
+              />
+              {Object.keys(courDurationErr).map((key) => {
+                return (
+                  <p
+                    className="error-message"
+                    key={key}
+                    style={{ color: "red" }}
+                  >
+                    {courDurationErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-              type="text"
-              placeholder="courseDuration"
-              value={state.course.courseDuration}
-              onChange={(u) =>
-                setState({
-                  course: {
-                    ...state.course,
-                    //...state.course.project,
-                    courseDuration: u.target.value,
-                  },
-                })
-              }
-            />
-            {Object.keys(courDurationErr).map((key) => {
-              return (
-                <p className="error-message" key={key} style={{ color: "red" }}>
-                  {courDurationErr[key]}
-                </p>
-              );
-            })}
-          </div>
 
-          {/* <div>
+            {/* <div>
 
 <select
     className="form-control my-2"
@@ -190,19 +203,25 @@ function AddCourse(props) {
 })}
 </div> */}
 
-          <button
-            className="btn btn-outline-success mt-3 btn-custom"
-            onClick={handleClick}
-          >
-            {" "}
-            Add Course
-          </button>
-          <Link className="btn btn-outline-danger mt-3 ml-3 btn-custom" to="/courses">
-            Cancel
-          </Link>
-        </form>
+            <div className="btn-group">
+              <button
+                className="btn btn-outline-success mt-3 btn-custom"
+                onClick={handleClick}
+              >
+                {" "}
+                Add Course
+              </button>
+              <Link
+                className="btn btn-outline-danger mt-3 ml-3 btn-custom"
+                to="/admin"
+              >
+                Cancel
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 //used for dispatching actions to the store.

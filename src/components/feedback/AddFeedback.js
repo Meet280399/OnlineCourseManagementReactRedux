@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Feedback from "../../model/Feedback";
-import { addFeedback } from "../../redux/feedback/feedbackAction";
-import FeedbackService from "../../service/FeedbackService";
-import { Link } from "react-router-dom";
+import Feedback from "../../model/Feedback.js";
+import { addFeedback } from "../../redux/feedback/feedbackAction.js";
+import FeedbackService from "../../service/FeedbackService.js";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import "../../css/login.css";
+import { NavbarInstructor } from "../NavbarInstructor.js";
 
 function AddFeedback(props) {
   const navigate = useNavigate();
@@ -57,110 +59,122 @@ function AddFeedback(props) {
   }
 
   return (
-    <div className="add">
-      <div>
-        <form className="addForm">
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Feedback Id</label>
+    <>
+      <NavbarInstructor />
+      <div className="add">
+        <div>
+          <h2 className="login-header">Add a Feedback</h2>
+          <form>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Feedback Id</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                type="text"
+                placeholder="feedbackId"
+                value={state.feedback.feedbackId}
+                onChange={(u) => {
+                  setState({
+                    feedback: {
+                      ...state.feedback,
+                      feedbackId: u.target.value,
+                    },
+                  });
+                }}
+              />
+              {Object.keys(feedIdErr).map((key) => {
+                return (
+                  <p className="error-message" style={{ color: "red" }}>
+                    {feedIdErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-              type="text"
-              placeholder="feedbackId"
-              value={state.feedback.feedbackId}
-              onChange={(u) => {
-                setState({
-                  feedback: {
-                    ...state.feedback,
-                    feedbackId: u.target.value,
-                  },
-                });
-              }}
-            />
-            {Object.keys(feedIdErr).map((key) => {
-              return (
-                <p className="error-message" style={{ color: "red" }}>
-                  {feedIdErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Description</label>
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Description</label>
+              </div>
+              <input
+                className="form-control my-2 col-md-8"
+                type="text"
+                placeholder="feedbackDescription"
+                value={state.feedback.description}
+                onChange={(u) =>
+                  setState({
+                    feedback: {
+                      ...state.feedback,
+
+                      description: u.target.value,
+                    },
+                  })
+                }
+              />
+              {Object.keys(feedDescriptionErr).map((key) => {
+                return (
+                  <p
+                    className="error-message"
+                    key={key}
+                    style={{ color: "red" }}
+                  >
+                    {feedDescriptionErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control my-2"
-              type="text"
-              placeholder="feedbackDescription"
-              value={state.feedback.description}
-              onChange={(u) =>
-                setState({
-                  feedback: {
-                    ...state.feedback,
-
-                    description: u.target.value,
-                  },
-                })
-              }
-            />
-            {Object.keys(feedDescriptionErr).map((key) => {
-              return (
-                <p className="error-message" key={key} style={{ color: "red" }}>
-                  {feedDescriptionErr[key]}
-                </p>
-              );
-            })}
-          </div>
-          <br></br>
-          <div className="addInput">
-            <div className="label-div">
-              <label>Enter Feedback Date</label>
+            <br></br>
+            <div className="row">
+              <div className="label-div col-md-4">
+                <label>Enter Feedback Date</label>
+              </div>
+              <input
+                className="form-control col-md-8"
+                type="text"
+                placeholder="feedbackDate"
+                value={state.feedback.feedbackDate}
+                onChange={(u) =>
+                  setState({
+                    feedback: {
+                      ...state.feedback,
+                      feedbackDate: u.target.value,
+                    },
+                  })
+                }
+              />
+              {Object.keys(feedDateErr).map((key) => {
+                return (
+                  <p
+                    className="error-message"
+                    key={key}
+                    style={{ color: "red" }}
+                  >
+                    {feedDateErr[key]}
+                  </p>
+                );
+              })}
             </div>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="feedbackDate"
-              value={state.feedback.feedbackDate}
-              onChange={(u) =>
-                setState({
-                  feedback: {
-                    ...state.feedback,
-                    feedbackDate: u.target.value,
-                  },
-                })
-              }
-            />
-            {Object.keys(feedDateErr).map((key) => {
-              return (
-                <p className="error-message" key={key} style={{ color: "red" }}>
-                  {feedDateErr[key]}
-                </p>
-              );
-            })}
-          </div>
 
-          <div></div>
-
-          <button
-            className="btn btn-outline-success mt-3 btn-custom"
-            onClick={handleClick}
-          >
-            {" "}
-            Add Feedback
-          </button>
-          <Link
-            className="btn btn-outline-danger mt-3 ml-3 btn-custom"
-            to="/feedbacks"
-          >
-            Cancel
-          </Link>
-        </form>
+            <div className="btn-group">
+              <button
+                className="btn btn-outline-success mt-3 btn-custom"
+                onClick={handleClick}
+              >
+                {" "}
+                Add Feedback
+              </button>
+              <Link
+                className="btn btn-outline-danger mt-3 ml-3 btn-custom"
+                to="/instructors"
+              >
+                Cancel
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 //used for dispatching actions to the store.

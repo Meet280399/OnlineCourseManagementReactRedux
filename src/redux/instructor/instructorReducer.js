@@ -6,7 +6,7 @@ import {
     UPDATE_INSTRUCTOR_REQUEST,
     ADD_INSTRUCTOR_REQUEST,
     SEARCH_INSTRUCTORS_REQUEST
-} from "./instructorTypes";
+} from "./instructorTypes.js";
 
 const initialState = {
     loading: true,

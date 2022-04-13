@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 //import Instructor from "../model/Instructor";
-import { updateInstructor } from "../../redux/instructor/instructorActions";
+import { updateInstructor } from "../../redux/instructor/instructorActions.js";
+import { NavbarInstructor } from "../NavbarInstructor.js";
 //import InstructorService from "../service/InstructorService";
 
 function UpdateInstructor() {
@@ -55,7 +56,7 @@ function UpdateInstructor() {
       instMobileNoErr.instMobileNoRequired =
         "Instructor mobile number is Required";
       isValid = false;
-    } else if (instructor.mobileNo.length != 10) {
+    } else if (!instructor.mobileNo.length > 10) {
       instMobileNoErr.instMobileNoRequired = "Please 10 Digit Phone Number";
     }
 
@@ -98,174 +99,177 @@ function UpdateInstructor() {
 
   function createForm(instructor) {
     return (
-      <div className="row">
-        <div className="col-md-6 mx-auto">
-          <h2>Update instructor</h2>
-          <form>
-            <div>
-              <input
-                className="form-control"
-                type="text"
-                id="instructorId"
-                placeholder="Enter Instructor Id"
-                value={instructor.instructorId}
-                readOnly={true}
-              />
-            </div>
-            <br></br>
-            <div>
-              <input
-                className="form-control my-2"
-                type="text"
-                id="name"
-                placeholder="Enter Instructor Name"
-                value={instructor.name}
-                onChange={(e) =>
-                  setInstructor({
-                    ...instructor,
-                    name: e.target.value,
-                  })
-                }
-              />
-              {Object.keys(instNameErr).map((key) => {
-                return (
-                  <p
-                    instructor={instructor}
-                    key={instructor.name}
-                    className="error-message"
-                    style={{ color: "red" }}
-                  >
-                    {instNameErr[key]}
-                  </p>
-                );
-              })}
-            </div>
-            <br></br>
-            <div>
-              <input
-                className="form-control"
-                type="text"
-                id="email"
-                placeholder="Enter Email-Id"
-                value={instructor.email}
-                onChange={(e) =>
-                  setInstructor({
-                    ...instructor,
+      <>
+        <NavbarInstructor />
+        <div className="row">
+          <div className="col-md-6 mx-auto">
+            <h2>Update instructor</h2>
+            <form>
+              <div>
+                <input
+                  className="form-control"
+                  type="text"
+                  id="instructorId"
+                  placeholder="Enter Instructor Id"
+                  value={instructor.instructorId}
+                  readOnly={true}
+                />
+              </div>
+              <br></br>
+              <div>
+                <input
+                  className="form-control my-2"
+                  type="text"
+                  id="name"
+                  placeholder="Enter Instructor Name"
+                  value={instructor.name}
+                  onChange={(e) =>
+                    setInstructor({
+                      ...instructor,
+                      name: e.target.value,
+                    })
+                  }
+                />
+                {Object.keys(instNameErr).map((key) => {
+                  return (
+                    <p
+                      instructor={instructor}
+                      key={instructor.name}
+                      className="error-message"
+                      style={{ color: "red" }}
+                    >
+                      {instNameErr[key]}
+                    </p>
+                  );
+                })}
+              </div>
+              <br></br>
+              <div>
+                <input
+                  className="form-control"
+                  type="text"
+                  id="email"
+                  placeholder="Enter Email-Id"
+                  value={instructor.email}
+                  onChange={(e) =>
+                    setInstructor({
+                      ...instructor,
 
-                    email: e.target.value,
-                  })
-                }
-              />
-              {Object.keys(instEmailErr).map((key) => {
-                return (
-                  <p
-                    instructor={instructor}
-                    key={instructor.email}
-                    className="error-message"
-                    style={{ color: "red" }}
-                  >
-                    {instEmailErr[key]}
-                  </p>
-                );
-              })}
-            </div>
-            <br></br>
-            <div>
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Instructor MobileNo"
-                value={instructor.mobileNo}
-                onChange={(e) => {
-                  setInstructor({
-                    ...instructor,
-                    mobileNo: e.target.value,
-                  });
-                }}
-              />
-              {Object.keys(instMobileNoErr).map((key) => {
-                return (
-                  <p
-                    instructor={instructor}
-                    key={instructor.mobileNo}
-                    className="error-message"
-                    style={{ color: "red" }}
-                  >
-                    {instMobileNoErr[key]}
-                  </p>
-                );
-              })}
-            </div>
-            <br></br>
-            <div>
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Instructor Salary In Rupees"
-                value={instructor.salary}
-                onChange={(e) => {
-                  setInstructor({
-                    ...instructor,
-                    salary: e.target.value,
-                  });
-                }}
-              />
-              {Object.keys(instSalaryErr).map((key) => {
-                return (
-                  <p
-                    instructor={instructor}
-                    key={instructor.salary}
-                    className="error-message"
-                    style={{ color: "red" }}
-                  >
-                    {instSalaryErr[key]}
-                  </p>
-                );
-              })}
-            </div>
-            <br></br>
-            <div>
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Instructor Grades"
-                value={instructor.grades}
-                onChange={(e) => {
-                  setInstructor({
-                    ...instructor,
-                    grades: e.target.value,
-                  });
-                }}
-              />
-              {Object.keys(instGradesErr).map((key) => {
-                return (
-                  <p
-                    instructor={instructor}
-                    key={instructor.grades}
-                    className="error-message"
-                    style={{ color: "red" }}
-                  >
-                    {instGradesErr[key]}
-                  </p>
-                );
-              })}
-            </div>
-            <br></br>
-            <button
-              className="btn btn-outline-primary mt-3"
-              onClick={handleSubmit}
-            >
-              Update Instructor
-            </button>
-            <Link
-              className="btn btn-outline-primary mt-3 ml-3"
-              to="/instructors"
-            >
-              Cancel
-            </Link>
-          </form>
+                      email: e.target.value,
+                    })
+                  }
+                />
+                {Object.keys(instEmailErr).map((key) => {
+                  return (
+                    <p
+                      instructor={instructor}
+                      key={instructor.email}
+                      className="error-message"
+                      style={{ color: "red" }}
+                    >
+                      {instEmailErr[key]}
+                    </p>
+                  );
+                })}
+              </div>
+              <br></br>
+              <div>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Instructor MobileNo"
+                  value={instructor.mobileNo}
+                  onChange={(e) => {
+                    setInstructor({
+                      ...instructor,
+                      mobileNo: e.target.value,
+                    });
+                  }}
+                />
+                {Object.keys(instMobileNoErr).map((key) => {
+                  return (
+                    <p
+                      instructor={instructor}
+                      key={instructor.mobileNo}
+                      className="error-message"
+                      style={{ color: "red" }}
+                    >
+                      {instMobileNoErr[key]}
+                    </p>
+                  );
+                })}
+              </div>
+              <br></br>
+              <div>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Instructor Salary In Rupees"
+                  value={instructor.salary}
+                  onChange={(e) => {
+                    setInstructor({
+                      ...instructor,
+                      salary: e.target.value,
+                    });
+                  }}
+                />
+                {Object.keys(instSalaryErr).map((key) => {
+                  return (
+                    <p
+                      instructor={instructor}
+                      key={instructor.salary}
+                      className="error-message"
+                      style={{ color: "red" }}
+                    >
+                      {instSalaryErr[key]}
+                    </p>
+                  );
+                })}
+              </div>
+              <br></br>
+              <div>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Instructor Grades"
+                  value={instructor.grades}
+                  onChange={(e) => {
+                    setInstructor({
+                      ...instructor,
+                      grades: e.target.value,
+                    });
+                  }}
+                />
+                {Object.keys(instGradesErr).map((key) => {
+                  return (
+                    <p
+                      instructor={instructor}
+                      key={instructor.grades}
+                      className="error-message"
+                      style={{ color: "red" }}
+                    >
+                      {instGradesErr[key]}
+                    </p>
+                  );
+                })}
+              </div>
+              <br></br>
+              <button
+                className="btn btn-outline-primary mt-3"
+                onClick={handleSubmit}
+              >
+                Update Instructor
+              </button>
+              <Link
+                className="btn btn-outline-primary mt-3 ml-3"
+                to="/instructors"
+              >
+                Cancel
+              </Link>
+            </form>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import CourseService from "../../service/CourseService";
+import CourseService from "../../service/CourseService.js";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCourse } from "../../redux/course/courseAction";
-import Course from '../../model/Course';
+import { updateCourse } from "../../redux/course/courseAction.js";
+import Course from '../../model/Course.js';
 
 export default function UpdateCourse() {
 

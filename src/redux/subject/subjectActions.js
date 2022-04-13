@@ -1,4 +1,4 @@
-import SubjectService from "../../service/SubjectService"
+import SubjectService from "../../service/SubjectService.js"
 import {
     FETCH_SUBJECTS_REQUEST,
     FETCH_SUBJECTS_SUCCESS,
@@ -7,7 +7,7 @@ import {
     UPDATE_SUBJECT_REQUEST,
     ADD_SUBJECT_REQUEST,
     SEARCH_SUBJECTS_REQUEST
-} from "./subjectTypes";
+} from "./subjectTypes.js";
 
 export const fetchSubjectsRequest = () => {
     return {

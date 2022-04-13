@@ -1,4 +1,4 @@
-import FeedbackService from "../../service/FeedbackService"
+import FeedbackService from "../../service/FeedbackService.js"
 import {
     FETCH_FEEDBACKS_REQUEST,
     FETCH_FEEDBACKS_SUCCESS,
@@ -7,7 +7,7 @@ import {
     UPDATE_FEEDBACK_REQUEST,
     ADD_FEEDBACK_REQUEST,
     SEARCH_FEEDBACKS_REQUEST
-} from "./feedbackType";
+} from "./feedbackType.js";
 
 export const fetchFeedbacksRequest = () => {
     return {

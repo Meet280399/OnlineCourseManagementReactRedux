@@ -1,11 +1,11 @@
-import Course from "./Course";
+// import Course from "./Course";
 class Student {
   studentId = "";
   studentName = "";
   studentEmail = "";
   studentAddress = "";
   studentMobile = "";
-  course = new Course();
+  // course = new Course();
 }
 
 export default Student;

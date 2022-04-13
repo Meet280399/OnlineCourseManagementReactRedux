@@ -6,7 +6,7 @@ import {
   DELETE_STUDENT_REQUEST,
   ADD_STUDENT_REQUEST,
   SEARCH_STUDENTS_REQUEST,
-} from "./studentTypes";
+} from "./studentTypes.js";
 
 const initialState = {
   loading: false,

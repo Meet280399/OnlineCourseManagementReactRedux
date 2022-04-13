@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteSubject, fetchSubjects } from "../../redux/subject/subjectActions";
+import { deleteSubject, fetchSubjects } from "../../redux/subject/subjectActions.js";
 function Home({ subjectsData, fetchSubjects, deleteSub }) {//bcm prop of comp
 
     useEffect(() => {

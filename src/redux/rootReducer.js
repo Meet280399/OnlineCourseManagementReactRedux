@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import courseReducer from "./course/courseReducer";
-import studentReducer from "./student/studentReducer";
-import subjectReducer from "./subject/subjectReducer";
-import instructorReducer from "./instructor/instructorReducer";
-import feedbackReducer from './feedback/feedbackReducer'
+import courseReducer from "./course/courseReducer.js";
+import studentReducer from "./student/studentReducer.js";
+import subjectReducer from "./subject/subjectReducer.js";
+import instructorReducer from "./instructor/instructorReducer.js";
+import feedbackReducer from './feedback/feedbackReducer.js'
 
 const rootReducer = combineReducers({
   courses: courseReducer,

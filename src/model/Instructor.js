@@ -1,4 +1,4 @@
-import Feedback from "./Feedback";
+// import Feedback from "./Feedback.js";
 
 class Instructor{
     instructorId= '';
@@ -7,7 +7,7 @@ class Instructor{
     mobileNo='';
     salary='';
     grades='';
-    feedback = new Feedback();
+    // feedback = new Feedback();
 }
 
 export default Instructor;

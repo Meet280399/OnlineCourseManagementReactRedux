@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { updateSubject } from "../../redux/subject/subjectActions";
-import SubjectService from "../../service/SubjectService";
+import { updateSubject } from "../../redux/subject/subjectActions.js";
+import SubjectService from "../../service/SubjectService.js";
 // import Subject from "./../../model/subject";
 
 export default function UpdateSubject() {

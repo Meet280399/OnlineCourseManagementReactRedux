@@ -3,11 +3,11 @@ import axios from 'axios';
 class InstructorService {
     baseUrl = `http://localhost:8090/onlinecoursemanagement/rest/instructors`;
     getAllInstructors() {
-        alert("inside get all instructor")
+        // alert("inside get all instructor")
         return axios.get(this.baseUrl);
     }
     addInstructor(instructor) {
-        console.log("inside service" +JSON.stringify(instructor))
+        // console.log("inside service" +JSON.stringify(instructor))
         return axios.post(this.baseUrl, instructor);
     }
     deleteInstructorById(instId) {
