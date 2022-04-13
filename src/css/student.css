@@ -27,9 +27,11 @@
   text-align: center;
 }
 .add .error-message {
-  position: absolute;
-  top: 75%;
-  left: 20%;
+  margin-left: 254px;
+}
+
+.add .label-div label {
+  margin-top: 12px;
 }
 
 .container.container-center {
@@ -43,7 +45,7 @@
 
 /*css for the header of application*/
 .header-background {
-  background-image: url("../../image/header-image3.png");
+  background-image: url("../image/header-image3.png");
   background-repeat: no-repeat;
   background-size: 1262px 250px;
   background-position: center;
