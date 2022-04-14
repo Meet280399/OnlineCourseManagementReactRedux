@@ -17,15 +17,16 @@ describe("InstructorService", () => {
     it("add instructor ", () => {
       let service = new InstructorService();
       let inst = new Instructor();
-      inst.instructorId = 5;
-      inst.name = "akhila";
+      inst.instructorId = 205;
+      inst.name = "Akhil Inamdar";
       inst.email = "akhila@gmail.com";
-      inst.mobileNo = 7896421598;
+      inst.mobileNo = 8822012399;
       inst.salary = 20000;
       inst.grades = 50;
 
       service.addInstructor(inst).then((result) => {
         let instructor = result.data;
+        expect(instructor.name).toBe("Akhil Inamdar");
       });
     });
   });
@@ -34,17 +35,17 @@ describe("InstructorService", () => {
     it("update instructor", () => {
       let service = new InstructorService();
       let inst = new Instructor();
-      inst.instructorId = 5;
-      inst.name = "monika";
-      inst.email = "akhila@gmail.com";
-      inst.mobileNo = 7896421598;
+      inst.instructorId = 205;
+      inst.name = "Monika Deshpande";
+      inst.email = "monika@gmail.com";
+      inst.mobileNo = 8822012399;
       inst.salary = 20000;
       inst.grades = 50;
 
       service.updateInstructor(inst).then((result) => {
-        service.findInstructorById(5).then((result) => {
+        service.findInstructorById(205).then((result) => {
           let instructor = result.data;
-          expect(instructor.name).toBe("monika");
+          expect(instructor.name).toBe("Monika Mane");
         });
       });
     });
@@ -53,7 +54,7 @@ describe("InstructorService", () => {
   describe("delete Instructor", () => {
     it("detete instructor", () => {
       let service = new InstructorService();
-      let instId = 5;
+      let instId = 205;
       service.deleteInstructorById(5).then(() => {
         service.findInstructorById(instId).then((result) => {
           let instructor = result.data;
